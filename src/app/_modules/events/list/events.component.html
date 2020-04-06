@@ -1,0 +1,33 @@
+<h1>Hi {{currentUser.login}}!</h1>
+
+<p-table [value]="events">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Id</th>
+            <th>Idx urządzenia</th>
+            <th>Nazwa urządzenia</th>
+            <th>Wartość</th>
+            <th>Opis</th>
+            <th>Czas zdarzenia</th>
+            <th>Czas zarejestrowania</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-event>
+        <tr>
+            <td>{{event.id}}</td>
+            <td>{{event.device.idx}}</td>
+            <td>{{event.device.name}}</td>
+            <td>{{event.value}}</td>
+            <td>{{event.description}}</td>
+            <td>{{event.lastUpdate}}</td>
+            <td>{{event.creationDate}}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft" let-state>
+        {{state.first}}
+        <button type="button" pButton icon="pi-refresh"></button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+        <button type="button" pButton icon="pi-cloud-upload"></button>
+    </ng-template>
+</p-table>
