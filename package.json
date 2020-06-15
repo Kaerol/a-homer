@@ -6,6 +6,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "buildProdLocal": "ng build --prod --base-href=./",
+    "buildDevLocal": "ng build --base-href=./",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
