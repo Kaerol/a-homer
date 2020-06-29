@@ -4,11 +4,12 @@ import {AuthGuard} from './_services/auth.guard';
 import {RegisterComponent} from './_modules/users/register/register.component';
 import {EventsComponent} from './_modules/events/list/events.component';
 
-
 const routes: Routes = [
-    { path: '', component: EventsComponent, canActivate: [AuthGuard] },
+    // ******* user *******
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    // ******* events *******
+    { path: 'events', component: EventsComponent, canActivate: [AuthGuard] },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
