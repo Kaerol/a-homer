@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {first} from 'rxjs/operators';
 import {AuthenticationService} from '../../../_services/authentication.service';
 import {EventService} from '../event.service';
 import {HttpParams} from '@angular/common/http';
+import {Event} from '../../../_models/event';
 
 @Component({templateUrl: 'events.component.html'})
 export class EventsComponent implements OnInit {
@@ -14,6 +14,7 @@ export class EventsComponent implements OnInit {
     }
 
     first = 0;
+    pageSize = 100;
     events: Event[] = [];
     idx: string;
     name: string;
@@ -34,23 +35,38 @@ export class EventsComponent implements OnInit {
         this.loadAllEvents();
     }
 
-    private paginate($event: MouseEvent) {
-            console.log('1111111111');
-    }
-
     private loadAllEvents() {
         const params = this.getQueryParams();
 
-        this.eventService.getAll(params)
-            .subscribe(events => {
-                this.events = events;
-            });
+        this.eventService.getAll(params).then(
+            events => this.events = events
+        );
+    }
+
+    next() {
+        this.first = this.first + this.pageSize;
+    }
+
+    prev() {
+        this.first = this.first - this.pageSize;
+    }
+
+    reset() {
+        this.first = 0;
+    }
+
+    isLastPage(): boolean {
+        return this.first === (this.events.length - this.pageSize);
+    }
+
+    isFirstPage(): boolean {
+        return this.first === 0;
     }
 
     private getQueryParams() {
         let params = new HttpParams();
         params = params.append('pageNo', '1');
-        params = params.append('pageSize', '100');
+        params = params.append('pageSize', String(this.pageSize));
 
         if (this.idx) {
             params = params.append('deviceIdx', this.idx);

@@ -44,8 +44,7 @@
     </div>
 </p-fieldset>
 
-<p-table [value]="events" [paginator]="true" [showCurrentPageReport]="true" (onPage)="paginate($event)" [(first)]="first"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+<p-table [value]="events" >
     <ng-template pTemplate="header">
         <tr>
             <th>Id</th>
